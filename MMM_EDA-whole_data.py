@@ -505,16 +505,16 @@ with plt_box_13:
 
     
     # if gmv_option4 == "No":
-    fig_product_analytic_category_orders = px.bar(df_product_analytic_category_orders(),
-                                x='total_orders',y='product_analytic_category',
-                                orientation='h',
-                                # hover_name='Party',
+    fig_product_analytic_category_orders = px.pie(df_product_analytic_category_orders(),
+                                values='total_orders',names='product_analytic_category',
+                                # orientation='h',
                                 labels={
                                         "total_orders": "Total Orders"
                                     },
                             
                             title=f'<b>Overall Total Orders by product_analytic_category</b>'
-    ).update_yaxes(type='category', categoryorder='max ascending')
+    ).update_traces(textposition='inside', textinfo='percent+label+value')
+    # .update_yaxes(type='category', categoryorder='max ascending')
 
     tab16.plotly_chart(fig_product_analytic_category_orders,use_container_width=True, config = config)
 
@@ -541,16 +541,16 @@ with plt_box_23:
     tab17, tab27 = st.tabs(["Total GMV","Total GMV Split By Years"])
 
     # if gmv_option5 == "No":
-    fig_product_analytic_category_gmv = px.bar(df_product_analytic_category_gmv(),
-                                x='total_gmv',y='product_analytic_category',
-                                orientation='h',
-                                # hover_name='Party',
+    fig_product_analytic_category_gmv = px.pie(df_product_analytic_category_gmv(),
+                                values='total_gmv',names='product_analytic_category',
+                                # orientation='h',
                                 labels={
                                         "total_gmv": "Total GMV"
                                     },
                             
                             title=f'<b>Overall Total GMV by product_analytic_category</b>'
-    ).update_yaxes(type='category', categoryorder='max ascending')
+    ).update_traces(textposition='inside', textinfo='percent+label+value')
+    # .update_yaxes(type='category', categoryorder='max ascending')
 
     tab17.plotly_chart(fig_product_analytic_category_gmv,use_container_width=True, config = config)
 
@@ -570,7 +570,8 @@ with plt_box_23:
     tab27.plotly_chart(fig_product_analytic_category_gmv_facet,use_container_width=True, config = config)
     
 
-st.divider()
+# st.divider()
+st.markdown("---")
 
 ##################################           #########################
 
@@ -627,6 +628,80 @@ st.markdown("""---""")
 ##################################           #########################
 
 
+
+
+
+
+
+
+#################################           ##########################
+
+
+col_71,col_72,col_73 = st.columns([3,4,2],gap = "small")
+with col_72:
+    st.markdown('<p class="big-font">By Product Analytic Sub Category</p>', unsafe_allow_html=True)
+
+
+plt_box_14,plt_box_24 = st.columns([1,1],gap = "small")
+
+# @st.cache_data
+# def df_product_analytic_subcategory_orders():
+#     return (Calc_total_orders(groupof=['product_analytic_sub_category'],count_of='order_id'
+#                                                               ).to_pandas())
+
+@st.cache_data
+def df_product_analytic_subcategory_orders_facet():
+    return (Calc_total_orders(groupof=['Year','product_analytic_sub_category'],count_of='order_id'
+                                                              ).to_pandas())
+# @st.cache_data
+# def df_product_analytic_subcategory_gmv():
+#     return (Calc_total_gmv(groupof=['product_analytic_sub_category'],sum_of='gmv'
+#                                                                 ).to_pandas())
+@st.cache_data
+def df_product_analytic_subcategory_gmv_facet():
+    return (Calc_total_gmv(groupof=['Year','product_analytic_sub_category'],sum_of='gmv'
+                                                                ).to_pandas())
+
+
+with plt_box_14:
+    
+    fig_product_analytic_subcategory_orders_facet = px.bar(df_product_analytic_subcategory_orders_facet(),
+                        x='total_orders',y='product_analytic_sub_category', facet_col='Year',
+                        orientation='h',
+                        # hover_name='Party',
+                        labels={
+                                "total_gmv": "Total GMV"
+                            },
+                    
+                    title=f'<b>Overall Total Orders by product_analytic_subcategory</b>'
+                    
+    ).update_yaxes(type='category', categoryorder='max ascending') # 
+    
+    st.plotly_chart(fig_product_analytic_subcategory_orders_facet,use_container_width=True, config = config)
+    
+
+
+with plt_box_24:
+
+    fig_product_analytic_subcategory_gmv_facet = px.bar(df_product_analytic_subcategory_gmv_facet(),
+                                x='total_gmv',y='product_analytic_sub_category',facet_col='Year',
+                                orientation='h',
+                                # hover_name='Party',
+                                labels={
+                                        "total_gmv": "Total GMV"
+                                    },
+                            
+                            title=f'<b>Overall Total GMV by product_analytic_subcategory</b>'
+                    
+    ).update_yaxes(type='category', categoryorder='max ascending') #
+    
+    st.plotly_chart(fig_product_analytic_subcategory_gmv_facet,use_container_width=True, config = config)
+    
+
+# st.divider()
+st.markdown("---")
+
+##################################           #########################
 
 
 
