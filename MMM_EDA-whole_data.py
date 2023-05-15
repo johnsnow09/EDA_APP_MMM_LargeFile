@@ -670,7 +670,7 @@ with plt_box_14:
                         orientation='h',
                         # hover_name='Party',
                         labels={
-                                "total_gmv": "Total GMV"
+                                "total_orders": "Total Orders"
                             },
                     
                     title=f'<b>Overall Total Orders by product_analytic_subcategory</b>'
@@ -696,13 +696,91 @@ with plt_box_24:
     ).update_yaxes(type='category', categoryorder='max ascending') #
     
     st.plotly_chart(fig_product_analytic_subcategory_gmv_facet,use_container_width=True, config = config)
-    
 
-# st.divider()
+
+st.write("As we can see in the Above plots, Speaker category has the highest number of Total Orders but Camera category gets \
+         the highest Total GMV which makes Camera a Premium category for the firm.")
+
 st.markdown("---")
 
 ##################################           #########################
 
+
+
+
+
+
+
+#################################           ##########################
+
+
+col_81,col_82,col_83 = st.columns([4,4,2],gap = "small")
+with col_82:
+    st.markdown('<p class="big-font">By Pincode</p>', unsafe_allow_html=True)
+
+
+plt_box_15,plt_box_25 = st.columns([1,1],gap = "small")
+
+
+@st.cache_data
+def df_pincode_orders_facet():
+    return (Calc_total_orders(groupof=['Year','pincode'],count_of='order_id'
+                              ).sort(['Year','total_orders'], descending=[True,True]
+                                     ).groupby(['Year'], maintain_order=True
+                                               ).head(15).to_pandas())
+
+@st.cache_data
+def df_pincode_gmv_facet():
+    return (Calc_total_gmv(groupof=['Year','pincode'],sum_of='gmv'
+                            ).sort(['Year','total_gmv'], descending=[True,True]
+                                     ).groupby(['Year'], maintain_order=True
+                                               ).head(15).to_pandas())
+
+
+with plt_box_15:
+    
+    fig_pincode_orders_facet = px.bar(df_pincode_orders_facet(),
+                        x='total_orders',y='pincode', facet_col='Year',
+                        orientation='h',
+                        # hover_name='Party',
+                        labels={
+                                "total_orders": "Total Orders"
+                            },
+                                category_orders={'Year':[2015,2016]},
+                    
+                    title=f'<b>Top 15 Pincodes by Total Orders in respective Years</b>'
+                    
+    ).update_yaxes(type='category', categoryorder='max ascending') # 
+    
+    st.plotly_chart(fig_pincode_orders_facet,use_container_width=True, config = config)
+    
+
+
+with plt_box_25:
+
+    fig_pincode_gmv_facet = px.bar(df_pincode_gmv_facet(),
+                                x='total_gmv',y='pincode',facet_col='Year',
+                                orientation='h',
+                                # hover_name='Party',
+                                labels={
+                                        "total_gmv": "Total GMV"
+                                    },
+                                category_orders={'Year':[2015,2016]},
+                            
+                            title=f'<b>Top 15 Pincodes by Total GMV in respective Years</b>'
+                    
+    ).update_yaxes(type='category', categoryorder='max ascending') #
+    
+    st.plotly_chart(fig_pincode_gmv_facet,use_container_width=True, config = config)
+    
+
+st.write("As we can see in the Above plots, the top 3-4 pincodes in 2016 are highest by both GMV & Total Orders so that makes it \
+         very important areas both from monetary & logistics perspective. In 2015 or 2016 if some Pincode in GMV is not \
+        showing any value that doesn't mean it was 0 GMV for that pincode, it only means it is not in top 15 GMV of that year")
+
+st.markdown("---")
+
+##################################           #########################
 
 
 
