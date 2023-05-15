@@ -114,6 +114,8 @@ def get_Repeated_customer_df():
 
 
 
+
+
 ############################## CREATING HEADER ##############################
 
 header_left,header_mid,header_right = st.columns([1,8,1],gap = "small")
@@ -123,6 +125,8 @@ with header_mid:
     st.title("Exploratary Data Analysis of Ecommerce ElecKart Consumer Electronics (WIP)")
 
 ############################## HEADER DONE ##############################
+
+
 
 
 
@@ -138,23 +142,7 @@ with header_mid:
 
 
 
-
-############################## FILTERED DATA ##############################
-
-# df_selected = df.filter((pl.col('State') == State_Selected) &
-#                     (pl.col('Year').is_in(Year_Selected))
-#                     )
-############################## FILTERED DATA DONE ##############################    
-
-
-############################## USEFUL AGGREGATIONS & LIST ##############################
-
-
-############################## USEFUL AGGREGATIONS & LIST DONE ##############################
-
-
 # st.write(df_consumer.dtypes)
-
 
 
 # col_01,col_02,col_03 = st.columns([4,4,2],gap = "small")
@@ -172,14 +160,14 @@ with st.expander("Click here to View the Demo of the Data"):
 
 v_spacer(4)    
 
+
+############################## Total Orders / GMV  ##############################
+
 col_11,col_12,col_13 = st.columns([4,4,2],gap = "small")
 with col_12:
     st.markdown('<p class="big-font">About Orders</p>', unsafe_allow_html=True)
 
 
-
-
-############################## FIRST PLOT ##############################
 plt_box_1,plt_box_2 = st.columns([7,1],gap = "small")
 
 @st.cache_data
@@ -236,7 +224,13 @@ with plt_box_2:
 # st.divider()
 st.markdown("""---""") 
 
-############################## FIRST PLOT DONE ##############################
+############################## Total Orders / GMV  ##############################
+
+
+
+
+
+############################## Total Orders / GMV Facet  ##############################
 
 plt_box_12,plt_box_22 = st.columns([1,1],gap = "small")
 
@@ -338,16 +332,14 @@ with plt_box_22:
 # st.divider()
 st.markdown("""---""") 
 
-##################################         ##########################
+############################## Total Orders / GMV Facet ##############################
 
 
 
 
 
 
-##################################         ##########################
-
-
+##################################  By Payment Method  ##########################
 
 col_31,col_32,col_33 = st.columns([3,4,2],gap = "small")
 with col_32:
@@ -402,7 +394,7 @@ st.write("As we can see in Above Plots - Not only the Number of Orders have incr
          customers in the organization.")
             
 
-#################################           ##########################
+##################################  By Payment Method End  ##########################
 
 
 
@@ -410,7 +402,7 @@ st.write("As we can see in Above Plots - Not only the Number of Orders have incr
 
 
 
-################################## REPEAT / NEW CUSTOMER        ##########################
+################################## REPEAT / NEW CUSTOMER  ##########################
 
 
 col_51,col_52,col_53 = st.columns([3,8,2],gap = "small")
@@ -459,7 +451,7 @@ with col_62:
 
 st.markdown("""---""") 
  
-#################################           ##########################
+################################## REPEAT / NEW CUSTOMER End  ##########################
 
 
 
@@ -468,7 +460,7 @@ st.markdown("""---""")
 
 
 
-#################################           ##########################
+#################################  By product_analytic_category  ##########################
 
 
 col_21,col_22,col_23 = st.columns([3,4,2],gap = "small")
@@ -573,7 +565,7 @@ with plt_box_23:
 # st.divider()
 st.markdown("---")
 
-##################################           #########################
+#################################  By product_analytic_category End  ##########################
 
 
 
@@ -581,9 +573,7 @@ st.markdown("---")
 
 
 
-#################################           ##########################
-
-
+#################################  By product_analytic_category Line facet plots ##########################
 
 # v_spacer(3)
 # gmv_option6 = st.radio("In below Plot - Use Total GMV instead of Total Orders??",options=['No','Yes'], horizontal=True, key=6)
@@ -625,7 +615,7 @@ tab24.plotly_chart(fig_product_analytic_category_gmv_facet,use_container_width=T
 
 st.markdown("""---""") 
 
-##################################           #########################
+#################################  By product_analytic_category End  ##########################
 
 
 
@@ -634,7 +624,7 @@ st.markdown("""---""")
 
 
 
-#################################           ##########################
+#################################  By product_analytic_subcategory  ##########################
 
 
 col_71,col_72,col_73 = st.columns([3,4,2],gap = "small")
@@ -703,7 +693,7 @@ st.write("As we can see in the Above plots, Speaker category has the highest num
 
 st.markdown("---")
 
-##################################           #########################
+##################################  By product_analytic_subcategory End  #########################
 
 
 
@@ -711,7 +701,7 @@ st.markdown("---")
 
 
 
-#################################           ##########################
+#################################  By Pincode  ##########################
 
 
 col_81,col_82,col_83 = st.columns([4,4,2],gap = "small")
@@ -780,7 +770,7 @@ st.write("As we can see in the Above plots, the top 3-4 pincodes in 2016 are hig
 
 st.markdown("---")
 
-##################################           #########################
+##################################  By Pincode End  #########################
 
 
 
